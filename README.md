@@ -1,38 +1,42 @@
-# practice-1
+# product_management
 
-This template should help get you started developing with Vue 3 in Vite.
+## 概要
+商品管理を再現したWebアプリケーションです。 
+データをローカルストレージに保管してそのデータを使い表示と更新をする。
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 使用技術
+- HTML
+- CSS
+- JavaScript
+- Vue
 
-## Recommended Browser Setup
+---
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## アプリ内容・機能
+- ログイン・ログアウト機能
+- データの追加・編集・削除機能
 
-## Customize configuration
+---
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 工夫した点
+- ローカルストレージの仕組みを理解するためにDBを使わずに制作しました
+- Vueを使うことでページの更新をかけずに再描写を行えるようにしました
 
-## Project Setup
+---
+
+## 苦労した点
+- ローカルストレージの情報編集
+- ref関数の理解
+
+---
+
+
+## セットアップ方法
 
 ```sh
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```

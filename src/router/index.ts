@@ -8,16 +8,16 @@ import Pass from '@/views/pass.vue'
 import UserList from '@/views/userList.vue'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/product_management/'),
   routes: [
-     { path: '/', redirect: '/login' },
+    { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
     { path: '/new', component: New },
-    { path: '/login-complete',component: LoginComplete},
+    { path: '/login-complete', component: LoginComplete },
     { path: '/category', component: Category },
-    { path: '/product',component: Product},
-    { path: '/pass',component: Pass},
-    { path: '/user-list',component: UserList},
+    { path: '/product', component: Product },
+    { path: '/pass', component: Pass },
+    { path: '/user-list', component: UserList },
   ]
 })
 

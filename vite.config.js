@@ -5,12 +5,18 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [vue(), vueDevTools()],
-  base: '/product_management/', // GitHubリポジトリ名
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    vue(),
+    vueDevTools(),
+  ],
+  // dev と production で base を切り替える
+  base: mode === 'production'
+    ? '/product_management/' // GitHub リポジトリ名
+    : '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-})
+}))

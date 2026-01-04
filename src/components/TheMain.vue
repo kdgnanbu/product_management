@@ -34,9 +34,6 @@ const goHome = () => {
 .page-container {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  /* height: 100vh; */
-  /* background: linear-gradient(135deg, #e8f0ff, #f5f7fa); */
   font-family: "Noto Sans JP", sans-serif;
   
 }
@@ -58,14 +55,6 @@ const goHome = () => {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   /* animation: fadeIn 0.6s ease-out; */
 }
-
-/* タイトル */
-/* .title {
-  font-size: 26px;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: bold;
-} */
 
 /* サブタイトル */
 .subtitle {

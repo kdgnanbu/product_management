@@ -36,12 +36,6 @@ if(!isPassword(newPassword.value)) errorMessage.value = "※新しいパスワ�
 
 <template>
   <div class="add-area">
-<button 
-  class="back-btn"
-  @click="$router.push({ path: '/login-complete', query: { id: route.query.id } })"
->
-  ← 戻る
-</button>
     <h1>パスワード変更画面</h1>
     <div class="form-item">
       <label>今のパスワード：</label>

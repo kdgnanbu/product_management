@@ -59,9 +59,7 @@ const searchUser = () => {
 
 <template>
   <div class="add-area">
-    <button class="back-btn" @click="$router.push('/new')">
-      ← 戻る
-    </button>
+
     <h1>登録されているアカウント
     </h1>
 

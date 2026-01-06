@@ -111,8 +111,17 @@ onUnmounted(() => {
 -->
 
 <template>
+      <!-- <p v-if="errorMessage" class="error-msg">{{ errorMessage }}</p> -->
+      <p
+  v-if="errorMessage"
+  class="error-msg"
+  :style="{ top: errorMessage.split('\n').length === 1 ? '8vh' : '30px' }"
+>
+  {{ errorMessage }}
+</p>
+
     <div class="body">
-    <p v-if="errorMessage" class="error-msg">{{ errorMessage }}</p>
+
   <div class="main">
     
     <div class="welcome">
@@ -129,7 +138,7 @@ onUnmounted(() => {
         </div>
         <div class="form-item">
             <label>ユーザーID：</label>
-            <input type="text" v-model="id" placeholder="例：12345" maxlength="5" />
+            <input type="text" v-model="id" placeholder="半角数字5桁" maxlength="5" />
         </div>
         <div class="form-item" v-show="isEdit">
             <label>パスワード：</label>
@@ -143,7 +152,7 @@ onUnmounted(() => {
 </div>
 </template>
 
-<style >
+<style scoped>
 body {
   min-height: 100vh;
   margin: 0;
@@ -152,7 +161,7 @@ body {
 .body{
     background-color:#5ebcc3;
     width:70%;
-    height:700px;
+    height:100vh;
     border-top-right-radius: 100vh;
     border-bottom-right-radius: 100vh;
 }
@@ -164,7 +173,7 @@ body {
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
-  height: 400px;
+  height: 500px;
   background-color:rgb(17, 137, 141);
   border-radius: 12px;
   overflow: hidden;
@@ -301,7 +310,7 @@ body {
   width:50%;
   border-radius: 20px;
   border: none;
-  background-color: rgb(68, 109, 213);
+ background-color: rgb(17, 137, 141);
   color: #fff;
   font-size: 14px;
   cursor: pointer;
@@ -309,28 +318,53 @@ body {
 }
 
 .submit-btn:hover {
-  background-color: rgb(48, 86, 190);
+  background-color: rgb(42, 112, 119);
 }
 
 .submit-btn:active {
   transform: scale(0.98);
 }
 
-.error-msg {
+/* .error-msg {
     position:absolute;
     top:10%;;
-    width:50%;
+ 
       transform: translate(47%, -50%);
+         width:50%;
+  color: #ff4d4f;
+  background-color: #fff1f0;
+  border: 1px solid #ffa39e;
+  padding: 8px 12px;
+  border-radius: 6px;
+
+  text-align: center;
+  margin: 10px 0;
+  z-index:100;
+} */
+
+
+
+.error-msg {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: inline-block;      /* ← 重要 */
+  max-width: 90%;             /* 画面はみ出し防止 */
+
   color: #ff4d4f;
   background-color: #fff1f0;
   border: 1px solid #ffa39e;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 14px;
-  text-align: center;
-  /* margin: 10px 0; */
-  z-index:100;
+  white-space: pre-line;
+  z-index: 10000;
+  text-align: left;           /* 複数行でも自然 */
 }
+
+
 
 .login {
   margin-top: 6px;
@@ -351,6 +385,14 @@ body {
   .form-item input {
   width: 90%;
   }
+    .login{
+    margin-right:20px;
+  }
+  .error-msg {
+  width: 70%;
+  /* text-align:center; */
+  margin:auto;
+}
 }
 </style>
 

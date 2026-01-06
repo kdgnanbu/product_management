@@ -10,6 +10,28 @@ let ls = localStorage.users;
 users.value = ls ? JSON.parse(ls) : [];
 const router = useRouter()
 
+// const goLoginComplete = () => {
+//     if (!id.value || !password.value) {
+//         errorMessage.value = '※会員IDとパスワードを入力してください'
+//         return
+//     }
+//     const findUsers = users.value.find((x) => x.id === id.value);
+//     const findPass = users.value.find((x) => x.password === password.value);
+//     if (findUsers && findPass) {
+//         router.push({
+//             path: '/LoginComplete/category',
+//             query: {
+//                 id: findUsers.id
+//             }
+//         })
+//     } else {
+//         errorMessage.value = '※ログインに失敗しました'
+//         return
+//     }
+//     id.value = "";
+//     password.value = "";
+// }
+
 const goLoginComplete = () => {
     if (!id.value || !password.value) {
         errorMessage.value = '※会員IDとパスワードを入力してください'
@@ -18,19 +40,19 @@ const goLoginComplete = () => {
     const findUsers = users.value.find((x) => x.id === id.value);
     const findPass = users.value.find((x) => x.password === password.value);
     if (findUsers && findPass) {
-        router.push({
-            path: '/login-complete',
-            query: {
-                id: findUsers.id
-            }
-        })
+        // ✅ localStorage に保存
+        localStorage.setItem('memberId', findUsers.id)
+
+        router.push('/LoginComplete/category')
     } else {
         errorMessage.value = '※ログインに失敗しました'
         return
     }
+
     id.value = "";
     password.value = "";
 }
+
 
 const formLeft = ref('50%')
 
@@ -64,8 +86,15 @@ onUnmounted(() => {
 </script>
 
 <template>
+        <p
+  v-if="errorMessage"
+  class="error-msg"
+  :style="{ top: errorMessage.split('\n').length === 1 ? '8vh' : '30px' }"
+>
+  {{ errorMessage }}
+</p>
     <div class="body">
-    <p v-if="errorMessage" class="error-msg">{{ errorMessage }}</p>
+
   <div class="main">
     
     <div class="welcome">
@@ -78,7 +107,7 @@ onUnmounted(() => {
             <h1>ログイン</h1>
             <div class="form-item">
                 <label>ユーザーID：</label><br>
-                <input type="text" v-model="id" placeholder="例：12345" maxlength="5" />
+                <input type="text" v-model="id" placeholder="半角数字5桁" maxlength="5" />
             </div>
             <div class="form-item">
                 <label>パスワード：</label><br>
@@ -93,7 +122,7 @@ onUnmounted(() => {
 </div>
 </template>
 
-<style>
+<style scoped>
 body {
   min-height: 100vh;
   margin: 0;
@@ -102,7 +131,7 @@ body {
 .body{
     background-color:#5ebcc3;
     width:70%;
-    height:700px;
+    height:100vh;
       border-top-right-radius: 100vh;
   border-bottom-right-radius: 100vh;
 }
@@ -114,7 +143,7 @@ body {
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
-  height: 400px;
+  height: 500px;
   background-color:rgb(17, 137, 141);
   border-radius: 12px;
   overflow: hidden;
@@ -168,7 +197,7 @@ body {
   top: 0;
   width: 46%;
   min-width:300px;
-  height:340px;
+  height:438px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
@@ -225,7 +254,7 @@ body {
   width:50%;
   border-radius: 20px;
   border: none;
-  background-color: rgb(68, 109, 213);
+  background-color: rgb(17, 137, 141);
   color: #fff;
   font-size: 14px;
   cursor: pointer;
@@ -233,7 +262,7 @@ body {
 }
 
 .submit-btn:hover {
-  background-color: rgb(48, 86, 190);
+  background-color: rgb(42, 112, 119);
 }
 
 .submit-btn:active {
@@ -241,19 +270,23 @@ body {
 }
 
 .error-msg {
-    position:absolute;
-    top:10%;;
-    width:50%;
-      transform: translate(46%, -50%);
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: inline-block;      /* ← 重要 */
+  max-width: 90%;             /* 画面はみ出し防止 */
+
   color: #ff4d4f;
   background-color: #fff1f0;
   border: 1px solid #ffa39e;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 14px;
-  text-align: center;
-  /* margin: 10px 0; */
-  z-index:100;
+  white-space: pre-line;
+  z-index: 10000;
+  text-align: left;           /* 複数行でも自然 */
 }
 
 .login {
@@ -275,5 +308,13 @@ body {
   .form-item input {
   width: 90%;
   }
+  .login{
+    margin-right:20px;
+  }
+    .error-msg {
+  width: 70%;
+  /* text-align:center; */
+  margin:auto;
+}
 }
 </style>
